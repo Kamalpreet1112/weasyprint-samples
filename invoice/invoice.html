@@ -7,78 +7,92 @@
   </head>
 
   <body>
-    <h1>Invoice</h1>
+     <section
+      style="background-image: url(./images/steps-bg.png);">
+      <div style="">
+         <div style="background-color: #fff; padding: 20px; border-radius: 10px; margin-bottom: 50px;">
+            <div class="d-flex" style="display: flex; margin:20px 0px; gap:20px;">
+               <div style="width: 50px!important; max-width:50px;">
+                  <div  style="width: 50px!important; dispaly:inline;background-color: #DCF0EE; padding:10px; margin:15px 0px;">
+                     <p style="width: 50px!important; dispaly:inline;font-family: 'PT Sans', sans-serif; font-size: 16px; margin:0;">{{ np_address }}</p>
+                  </div>
+                  <div style="width: 50px!important; dispaly:inline;background-color: #DCF0EE; padding:10px; margin:15px 0px;">
+                     <p style="width: 50px!important; dispaly:inline;font-family: 'PT Sans', sans-serif; font-size: 16px; margin:0px; border-bottom: 1px solid #ccc;">Bill To</p>
+                     <p style="width: 50px!important; dispaly:inline;margin:0px;">XINCON HOME HEALTHCARE SERVICES 20 West 33rd Street, STE 2006A New York, NY 10001</p>
+                  </div>
+               </div>
+               <div style="margin-left:auto;" >
+                  <div>
+                     <h5 style="font-size: 18px; font-weight: 700; font-family: 'PT Sans', sans-serif; display:flex; justify-content:end; margin-bottom:0px; margin-top:0px; ">Invoice</h5>
+                     <form class="d-flex invoice-form"  style="display: flex; border:1px solid; width:50%;">
+                        <div style="width: 50%; margin:0; padding:0; border: 1px solid #ddd;">
+                          <label for="inputEmail4" class="form-label " style=" width:100%; text-align:center; padding:10px;">Date</label>
+                           <p style="margin:0px;">{{ created_at }}</p>
+                        </div>
+                        <div  style="width: 50%; margin:0; padding:0; border: 1px solid #ddd;">
+                          <label for="inputPassword4" class="form-label "  style=" width:100%; text-align:center; padding:10px;">Invoice#</label>
+                         <p style="margin:0px;">{{ invoice_id }}</p>
+                        </div>
+                      </form>
+                  </div>
+               </div>
+            </div>
+            <div style="display: flex; justify-content:end; float:right; width:400px;">
+               <table  style="width: 100%; margin:0; border-collapse: collapse;">
+                  <thead>
+                    <tr>
+                      <th  scope="col" style="border:1px solid #dee2e6;">P.O No</th>
+                      <th  style="border:1px solid #dee2e6;">Terms</th>
+                      <th  style="border:1px solid #dee2e6;">NP Number</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th  scope="row" style="border:1px solid #dee2e6;"><p></p></th>
+                      <td   style="border:1px solid #dee2e6;"><p></p></td>
+                      <td   style="border:1px solid #dee2e6;"><p>{{ np_number }}</p></td>
+                      
+                    </tr>
 
-    <aside>
-      <address id="from">
-        WeasyPrint
-        26 rue Emile Decorps
-        69100 Villeurbanne
-        France
-      </address>
+                  </tbody>
+                </table>
+            </div>
+            <div style="overflow: auto; ">
+               <table  style="width:100%; border-collapse:collapse;" >
+                  <thead style="">
+                    <tr >
+                      <th style="color: #fff; font-family: 'PT Sans', sans-serif; font-weight: 600;padding:0px; padding-left:10px; text-align:center; background-color: #276141; width:200px;">#</th>
+                      <th style=" color: #fff; font-family: 'PT Sans', sans-serif; font-weight: 600; text-align:center; background-color: #276141; padding:10px; width:300px;">Quantity</th>
+                      <th style=" color: #fff; font-family: 'PT Sans', sans-serif; font-weight: 600; text-align:center; background-color: #276141; padding:10px; width:300px;">Description</th>
+                      <th style=" color: #fff; font-family: 'PT Sans', sans-serif; font-weight: 600; text-align:center ; background-color: #276141; padding:10px; width:200px;">Rate</th>
+                      <th style=" color: #fff; font-family: 'PT Sans', sans-serif; font-weight: 600; text-align:center; background-color: #276141; padding:10px; width:200px; ">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in invoice_line_items %}
+                    <tr style="border-bottom:1px solid #ccc; " > 
+                      <th style=" padding:10px 0px 0px 10px; text-align:center;">{{ forloop.counter }}</th>
+                      <td style="padding:10px 0px; text-align:center;  ">{{ item.quantity }}</td>
+                      <td style="padding:10px 0px; text-align:center;">{{ item.description }}</td>
+                      <td style="padding:10px 0px; text-align:center"> {{ item.rate }}</td>
+                      <td style="padding:10px 0px; text-align:center;">{{ item.amount }}</td>
+                    </tr>
+                    {% endfor %}
+                   <tr style="border-bottom:1px solid #ccc;">
+                    <th style=" padding:10px 0px 0px 10px; text-align:left;" scope="row"></th>
+                    <td style="padding:10px 0px;"></td>
+                    <td style="padding:10px 0px;"></td>
+                    <td style="padding:10px 0px;"><b>Total</b></td>
+                    <td style="padding:10px 0px;">{{ total_amount }}</td>
+                  </tr>
+           
+                  </tbody>
+                </table>
+            </div>
+         </div>
+      </div>
+   </section>
 
-      <address id="to">
-        Our awesome developers
-        From all around the world
-        Earth
-      </address>
-    </aside>
 
-    <dl id="informations">
-      <dt>Invoice number</dt>
-      <dd>12345</dd>
-      <dt>Date</dt>
-      <dd>March 31, 2018</dd>
-    </dl>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Description</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Subtotal</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Website design</td>
-          <td>€34.20</td>
-          <td>100</td>
-          <td>€3,420.00</td>
-        </tr>
-        <tr>
-          <td>Website development</td>
-          <td>€45.50</td>
-          <td>100</td>
-          <td>€4,550.00</td>
-        </tr>
-        <tr>
-          <td>Website integration</td>
-          <td>€25.75</td>
-          <td>100</td>
-          <td>€2,575.00</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <footer>
-      <table id="total">
-        <thead>
-          <tr>
-            <th>Due by</th>
-            <th>Account number</th>
-            <th>Total due</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>May 10, 2018</td>
-            <td>132 456 789 012</td>
-            <td>€10,545.00</td>
-          </tr>
-        </tbody>
-      </table>
-    </footer>
   </body>
 </html>
